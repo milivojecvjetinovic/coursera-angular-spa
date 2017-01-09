@@ -15,6 +15,7 @@ function LunchCheckController($scope) {
     if ($scope.lunchMenu === undefined || $scope.lunchMenu.trim() === '') {
       $scope.color = 'red';
       $scope.message = 'Please enter data first.';
+      $scope.lunchMenu = '';
     } else {
       var food = $scope.lunchMenu.split(',');
       var count = food.length;
@@ -23,15 +24,20 @@ function LunchCheckController($scope) {
         if (item === undefined || item.trim() === '') --count;
       });
 
-      $scope.color = 'green';
-      if (count <= 3) {
-        $scope.message = 'Enjoy!';
+      if (count === 0) {
+        $scope.color = 'red';
+        $scope.message = 'Please enter data first.';
+        $scope.lunchMenu = '';
       } else {
-        $scope.message = 'Too much!';
+        $scope.color = 'green';
+        if (count <= 3) {
+          $scope.message = 'Enjoy!';
+        } else {
+          $scope.message = 'Too much!';
+        }
       }
     }
 
     $scope.bcolor = $scope.color;
   };
-
 }
