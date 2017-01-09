@@ -7,10 +7,13 @@ LunchCheckController.$inject = ['$scope'];
 function LunchCheckController($scope) {
   $scope.lunchMenu = '';
   $scope.message = '';
+  $scope.color = 'green';
+  $scope.bcolor = '';
 
   $scope.checkTooMuch = function() {
 
     if ($scope.lunchMenu === undefined || $scope.lunchMenu.trim() === '') {
+      $scope.color = 'red';
       $scope.message = 'Please enter data first.';
     } else {
       var food = $scope.lunchMenu.split(',');
@@ -20,13 +23,15 @@ function LunchCheckController($scope) {
         if (item === undefined || item.trim() === '') --count;
       });
 
+      $scope.color = 'green';
       if (count <= 3) {
         $scope.message = 'Enjoy!';
       } else {
         $scope.message = 'Too much!';
       }
-
     }
+
+    $scope.bcolor = $scope.color;
   };
 
 }
